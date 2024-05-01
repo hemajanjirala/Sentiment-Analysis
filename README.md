@@ -96,8 +96,8 @@ This report is useful for understanding the model's strengths and weaknesses and
 6. What is the purpose of the code block that plots the logistic curve and an orange curve? Explain the role of the `orange_curve` function and how it could be modified to plot a different curve.
 
 7. Explain the purpose of the `tqdm` library and how it is used in the provided code snippets to display progress bars during the training process.
-
-8. ## The following are some of the conclutions.
+   
+ ## The following are some of the conclutions.
 
 9. 1. The `func` function is used to map the sentiment labels ('positive', 'negative', and any other value) to numerical values (0, 1, and 2, respectively). It is applied to the 'sentiment' column of `train_ds` and `validation_ds` using the `apply` method to transform the textual sentiment labels into numerical values.
 
@@ -147,7 +147,44 @@ This report is useful for understanding the model's strengths and weaknesses and
 
 7. The `PorterStemmer` class from the `nltk.stem` module is used for stemming words, which is the process of reducing words to their base or root form. In the provided code, an instance of `PorterStemmer` (`ps`) is created, and the `stem` method is applied to a list of sample words (`sample_words`). The stemmed versions of these words are printed, demonstrating the stemming process (e.g., "python", "python", "pythonli", "python").
 
-8. 
+ # OBJECT DETECTION AND TRACKING IN VIDEOS.
+ ## The following are some of the problem statement.
+ 
+1. What is the purpose of the `Tracker` class, and how does it work in the context of object tracking?
+
+2. Explain the role of the `Detection` class and its attributes (`tlwh`, `confidence`, and `feature`).
+
+3. What is the purpose of the `iou` function, and how does it calculate the intersection over union between a bounding box and a set of candidate bounding boxes?
+
+4. Describe the purpose of the `iou_cost` function and how it is used in the context of object tracking.
+
+5. Explain the role of the `_match` function in the code and how it associates confirmed and unconfirmed tracks with detections.
+
+6. What is the purpose of the `_initiate_track` function, and when is it called during the object tracking process?
+
+7. Explain the overall workflow of the code, including how it processes the input data (video sequences), generates results, and saves the output videos.
+
+  
+ ## The following are some of the conclutions.
+
+ 1. The `Tracker` class is responsible for tracking objects across multiple frames in a video sequence. It uses the DeepSORT algorithm, which combines object detections with a deep learning-based feature extractor to associate detections with existing object tracks. The `update` method processes each frame by encoding the detected bounding boxes into features and updating the existing tracks or creating new tracks based on the feature similarities.
+
+2. The `Detection` class represents a bounding box detection in a single image frame. It has three main attributes: `tlwh` (top-left x, top-left y, width, height) representing the bounding box coordinates, `confidence` indicating the confidence score of the detection, and `feature` which is a feature vector describing the object within the bounding box. This class is used to encapsulate the information about each detected object in a frame.
+
+3. The `iou` function calculates the Intersection over Union (IoU) between a single bounding box (`bbox`) and a set of candidate bounding boxes (`candidates`). It computes the area of overlap between the `bbox` and each candidate, and divides it by the total area covered by both boxes. The IoU metric is commonly used to evaluate the quality of object detections and track assignments.
+
+4. The `iou_cost` function computes a cost matrix based on the IoU between existing tracks and new detections. It calculates the IoU cost (1 - IoU) between each track and detection pair, which represents the dissimilarity between them. This cost matrix is used in the track assignment process to determine the best match between tracks and detections based on their spatial overlap.
+
+5. The `_match` function is responsible for associating confirmed and unconfirmed tracks with new detections. It first matches confirmed tracks using appearance features (deep learning-based feature similarity) and a gating mechanism to filter out unlikely matches. Then, it matches the remaining unconfirmed tracks and unmatched detections using the IoU cost metric. This two-stage process aims to leverage both appearance and spatial information for robust track association.
+
+6. The `_initiate_track` function is called when a new detection cannot be associated with any existing track. It creates a new track by initializing its mean, covariance, and other track properties based on the detection's bounding box and feature vector. This function is responsible for starting to track a new object that has been detected in the scene.
+
+7. The overall workflow of the code is as follows:
+   a. It processes each video sequence in the `args.mot_dir` directory.
+   b. For each sequence, it reads the detection results from the corresponding file in `args.result_dir`.
+   c. It processes each frame by updating the `Tracker` object with the new detections.
+   d. The updated tracks are used to generate an output video file (`%s.avi` or `%s.mp4`) in the `args.output_dir` directory, which shows the tracked objects with their respective IDs.
+   e. If `args.convert_h264` is set, it converts the output videos from AVI to MP4 format for better compatibility.
 
 
 
