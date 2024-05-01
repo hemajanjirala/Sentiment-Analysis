@@ -3,12 +3,19 @@
 ## The following are some of the problem statement
 
 1)What is the size of the dataset (number of rows and columns) after loading it from the CSV file?
+
 2)What are the column names in the dataset?
+
 3)What is the distribution of the target variable (sentiment) in the dataset? (e.g., how many positive and negative sentiments)
+
 4)What is the purpose of using the PorterStemmer and removing stopwords during the text preprocessing step?
+
 5)How many features are used in the bag-of-words model created by the CountVectorizer?
+
 6)What is the train-test split ratio used for splitting the data into training and testing sets?
+
 7)What is the performance of the logistic regression model on the testing data in terms of accuracy, confusion matrix, and classification report?
+
 ## The following are some of the conclutions.
 
 1. The size of the dataset:
