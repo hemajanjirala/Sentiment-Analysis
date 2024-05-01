@@ -47,6 +47,9 @@ The code prints the accuracy, confusion matrix, and classification report, which
 
 # Sentiment Analysis Model Applying.ipynb
 ## The following are some of the problem statement
+
+1)What is the size of the dataset (number of rows and columns) after loading it from the CSV file?
+
 2)Explain the role of the re (regular expression) and stopwords modules in the preprocessing step.
 
 3)What is the purpose of the WordNetLemmatizer and how does it help in text preprocessing?
